@@ -210,7 +210,7 @@ export default function UWSLanding() {
             color: C.secondary, lineHeight: 1.6,
             maxWidth: "560px", margin: "0 auto 48px",
           }}>
-            The economy isn't broken. It's working exactly the way it was designed to. Just not for you. We built a tool to change that.
+            The economy isn't broken. It was designed to work for corporations, not people. We built a tool to change that.
           </p>
 
           <a href="/search" style={{
