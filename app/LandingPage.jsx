@@ -67,7 +67,7 @@ function AnimatedNumber({ target, prefix = "", suffix = "", color = C.cyan }) {
     <span ref={ref} style={{
       fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
       fontWeight: 700, color,
-      fontSize: "clamp(48px, 12vw, 96px)",
+      fontSize: "clamp(64px, 14vw, 96px)",
       lineHeight: 1,
       letterSpacing: "-0.04em",
     }}>{prefix}{visible ? count.toLocaleString() : "0"}{suffix}</span>
@@ -189,7 +189,7 @@ export default function UWSLanding() {
 
           <h1 style={{
             fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-            fontSize: "clamp(52px, 11vw, 140px)",
+            fontSize: "clamp(72px, 15vw, 140px)",
             fontWeight: 700, lineHeight: 0.95,
             letterSpacing: "-0.04em",
             margin: "0 0 32px 0",
@@ -206,7 +206,7 @@ export default function UWSLanding() {
           transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s",
         }}>
           <p style={{
-            fontFamily: "'Outfit', sans-serif", fontSize: "clamp(17px, 2.5vw, 22px)",
+            fontFamily: "'Outfit', sans-serif", fontSize: "clamp(18px, 3vw, 22px)",
             color: C.secondary, lineHeight: 1.6,
             maxWidth: "560px", margin: "0 auto 48px",
           }}>
@@ -268,7 +268,7 @@ export default function UWSLanding() {
         <RevealBlock delay={0.3}>
           <p style={{
             fontFamily: "'Outfit', sans-serif",
-            fontSize: "clamp(20px, 3vw, 28px)",
+            fontSize: "clamp(22px, 3.5vw, 28px)",
             color: C.secondary, lineHeight: 1.5,
             maxWidth: "600px", margin: "0 auto",
           }}>
@@ -294,7 +294,7 @@ export default function UWSLanding() {
         <RevealBlock delay={0.15}>
           <div style={{
             fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-            fontSize: "clamp(48px, 10vw, 96px)",
+            fontSize: "clamp(64px, 14vw, 96px)",
             fontWeight: 700, color: C.cyan,
             lineHeight: 1, letterSpacing: "-0.04em",
             marginBottom: "24px",
@@ -304,7 +304,7 @@ export default function UWSLanding() {
         <RevealBlock delay={0.3}>
           <p style={{
             fontFamily: "'Outfit', sans-serif",
-            fontSize: "clamp(20px, 3vw, 28px)",
+            fontSize: "clamp(22px, 3.5vw, 28px)",
             color: C.secondary, lineHeight: 1.5,
             maxWidth: "600px", margin: "0 auto",
           }}>
@@ -325,7 +325,7 @@ export default function UWSLanding() {
             }}>The math is simple</div>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-              fontSize: "clamp(32px, 6vw, 56px)",
+              fontSize: "clamp(40px, 8vw, 56px)",
               fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em",
               maxWidth: "700px", margin: "0 auto",
             }}>Same groceries. Different outcome.</h2>
@@ -431,7 +431,7 @@ export default function UWSLanding() {
             }}>The cost of convenience</div>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-              fontSize: "clamp(32px, 6vw, 56px)",
+              fontSize: "clamp(40px, 8vw, 56px)",
               fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em",
               maxWidth: "700px", margin: "0 auto",
             }}>
@@ -473,7 +473,7 @@ export default function UWSLanding() {
             }}>How it works</div>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-              fontSize: "clamp(32px, 6vw, 56px)",
+              fontSize: "clamp(40px, 8vw, 56px)",
               fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em",
             }}>Three taps. That's it.</h2>
           </div>
@@ -522,7 +522,7 @@ export default function UWSLanding() {
             }}>FAQ</div>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-              fontSize: "clamp(32px, 6vw, 48px)",
+              fontSize: "clamp(40px, 8vw, 48px)",
               fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em",
             }}>Questions you might have.</h2>
           </div>
@@ -558,7 +558,7 @@ export default function UWSLanding() {
         <RevealBlock delay={0.15}>
           <h2 style={{
             fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-            fontSize: "clamp(36px, 8vw, 72px)",
+            fontSize: "clamp(44px, 10vw, 72px)",
             fontWeight: 700, lineHeight: 1,
             letterSpacing: "-0.04em",
             margin: "0 0 24px 0",
@@ -609,7 +609,7 @@ export default function UWSLanding() {
         <RevealBlock delay={0.15}>
           <h2 style={{
             fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-            fontSize: "clamp(36px, 8vw, 72px)",
+            fontSize: "clamp(44px, 10vw, 72px)",
             fontWeight: 700, lineHeight: 1,
             letterSpacing: "-0.04em",
             margin: "0 0 16px 0",
