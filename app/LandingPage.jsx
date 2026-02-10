@@ -410,7 +410,7 @@ export default function UWSLanding() {
             }}>
               <div style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "clamp(24px, 5.5vw, 36px)",
+                fontSize: "clamp(20px, 4.5vw, 28px)",
                 fontWeight: 800, color: C.white,
               }}>$100</div>
             </div>
@@ -465,13 +465,6 @@ export default function UWSLanding() {
             fontWeight: 700, color: C.white, marginBottom: "8px",
           }}>
             One purchase. <span style={{ color: C.cyan }}>Five ripples. $500</span> in local impact.
-          </p>
-          <p style={{
-            fontFamily: "'Outfit', sans-serif", fontSize: "18px",
-            color: C.secondary, maxWidth: "520px", margin: "16px auto 0",
-            lineHeight: 1.6,
-          }}>
-            Do that once a week and you've redirected <span style={{ color: C.cyan, fontWeight: 700 }}>over $2,300 a year</span> back into your neighborhood.
           </p>
           <p style={{
             textAlign: "center", maxWidth: "600px", margin: "32px auto 0",
