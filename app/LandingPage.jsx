@@ -129,8 +129,31 @@ export default function UWSLanding() {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [selectedCity, setSelectedCity] = useState("");
+  const [rippleStep, setRippleStep] = useState(0);
+  const rippleRef = useRef(null);
+  const rippleStarted = useRef(false);
 
   useEffect(() => { setTimeout(() => setHeroReady(true), 200); }, []);
+
+  // Ripple scroll trigger
+  useEffect(() => {
+    const el = rippleRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && !rippleStarted.current) { rippleStarted.current = true; setRippleStep(1); } },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // Ripple step timer
+  useEffect(() => {
+    if (rippleStep > 0 && rippleStep < 5) {
+      const t = setTimeout(() => setRippleStep(s => s + 1), 1200);
+      return () => clearTimeout(t);
+    }
+  }, [rippleStep]);
 
   return (
     <div style={{ background: C.bg, color: C.white, minHeight: "100vh", overflowX: "hidden" }}>
@@ -314,9 +337,9 @@ export default function UWSLanding() {
       </section>
 
       {/* ─── THE MATH ─── */}
-      <section style={{ padding: "120px 32px", background: C.bgAlt, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
+      <section ref={rippleRef} style={{ padding: "120px 32px", background: C.bgAlt, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
         <RevealBlock>
-          <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <div style={{ textAlign: "center", marginBottom: "16px" }}>
             <div style={{
               fontFamily: "'Outfit', sans-serif", fontSize: "13px",
               fontWeight: 600, color: C.cyan,
@@ -328,84 +351,128 @@ export default function UWSLanding() {
               fontSize: "clamp(40px, 8vw, 56px)",
               fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em",
               maxWidth: "700px", margin: "0 auto",
-            }}>Same groceries. Different outcome.</h2>
+            }}>Spend $100 locally.<br /><span style={{ color: C.cyan }}>Watch it multiply.</span></h2>
           </div>
         </RevealBlock>
 
+        {/* Ripple Visualization */}
         <div style={{
-          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "24px", maxWidth: "800px", margin: "0 auto",
+          position: "relative",
+          width: "min(420px, 92vw)", height: "min(420px, 92vw)",
+          margin: "48px auto 0",
         }}>
-          <RevealBlock delay={0.1}>
-            <div style={{
-              background: C.bgCard, border: `1px solid ${C.border}`,
-              padding: "40px 32px", textAlign: "center",
-              position: "relative", overflow: "hidden",
-            }}>
-              <div style={{
-                position: "absolute", top: 0, left: 0, right: 0,
-                height: "3px", background: C.muted,
-              }} />
-              <div style={{
-                fontFamily: "'Outfit', sans-serif", fontSize: "12px",
-                fontWeight: 700, color: C.muted,
-                textTransform: "uppercase", letterSpacing: "0.15em",
-                marginBottom: "24px",
-              }}>National Retail Chain</div>
-              <div style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "64px", fontWeight: 700, color: C.muted,
-                lineHeight: 1, marginBottom: "8px",
-              }}>$27</div>
-              <div style={{
-                fontFamily: "'Outfit', sans-serif", fontSize: "15px",
-                color: C.muted, lineHeight: 1.5,
-              }}>stays in your community<br />per $100 spent</div>
-            </div>
-          </RevealBlock>
+          {/* Background glow */}
+          <div style={{
+            position: "absolute", top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "130%", height: "130%", borderRadius: "50%",
+            background: `radial-gradient(circle, ${C.teal}22 0%, transparent 70%)`,
+            pointerEvents: "none",
+            animation: rippleStep >= 1 ? "glowPulse 3s ease-in-out infinite" : "none",
+            opacity: rippleStep >= 1 ? undefined : 0,
+          }} />
 
-          <RevealBlock delay={0.25}>
+          {/* Rings */}
+          {[
+            { amount: 100, label: "Your purchase" },
+            { amount: 200, label: "2nd circulation" },
+            { amount: 300, label: "3rd circulation" },
+            { amount: 400, label: "4th circulation" },
+            { amount: 500, label: "5th circulation" },
+          ].reverse().map((ring, ri) => {
+            const i = 4 - ri;
+            const sizes = [22, 38, 55, 72, 90];
+            const size = sizes[i];
+            const active = rippleStep >= i + 1;
+            const opacity = 1 - i * 0.12;
+            const borderWidth = Math.max(1.5, 3 - i * 0.4);
+
+            return active ? (
+              <div key={i} style={{
+                position: "absolute", top: "50%", left: "50%",
+                width: `${size}%`, height: `${size}%`,
+                borderRadius: "50%",
+                border: `${borderWidth}px solid ${C.cyan}`,
+                opacity: opacity,
+                animation: `ringExpand 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, ringPulseAnim 4s ease-in-out 0.8s infinite`,
+              }} />
+            ) : null;
+          })}
+
+          {/* Center $73 */}
+          {rippleStep >= 1 && (
             <div style={{
-              background: C.bgCard, border: `1px solid ${C.cyan}22`,
-              padding: "40px 32px", textAlign: "center",
-              position: "relative", overflow: "hidden",
-              boxShadow: `0 0 60px ${C.teal}0A`,
+              position: "absolute", top: "50%", left: "50%",
+              width: "22%", height: "22%", borderRadius: "50%",
+              background: `radial-gradient(circle, ${C.teal}66 0%, ${C.teal}22 100%)`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              animation: "dropIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, ripplePulse 2.5s ease-in-out 0.7s infinite",
             }}>
               <div style={{
-                position: "absolute", top: 0, left: 0, right: 0,
-                height: "3px", background: C.cyan,
-              }} />
-              <div style={{
-                fontFamily: "'Outfit', sans-serif", fontSize: "12px",
-                fontWeight: 700, color: C.cyan,
-                textTransform: "uppercase", letterSpacing: "0.15em",
-                marginBottom: "24px",
-              }}>Local Retail Business</div>
-              <div style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "64px", fontWeight: 700, color: C.cyan,
-                lineHeight: 1, marginBottom: "8px",
-              }}>$73</div>
-              <div style={{
-                fontFamily: "'Outfit', sans-serif", fontSize: "15px",
-                color: C.secondary, lineHeight: 1.5,
-              }}>stays in your community<br />per $100 spent</div>
+                fontSize: "clamp(24px, 5.5vw, 36px)",
+                fontWeight: 800, color: C.white,
+              }}>$100</div>
             </div>
-          </RevealBlock>
+          )}
+
+          {/* Amount labels on rings */}
+          {[200, 300, 400, 500].map((amount, i) => {
+            const active = rippleStep >= i + 2;
+            if (!active) return null;
+            const sizes = [22, 38, 55, 72, 90];
+            const ringSize = sizes[i + 1];
+            const topPercent = 50 - ringSize / 2;
+
+            return (
+              <div key={`label-${i}`} style={{
+                position: "absolute",
+                top: `${topPercent}%`, left: "50%",
+                animation: "labelPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
+                animationDelay: "0.2s",
+                opacity: 0,
+                zIndex: 10,
+              }}>
+                <div style={{
+                  background: C.bgAlt,
+                  padding: "5px 14px",
+                  border: `1.5px solid ${C.teal}66`,
+                  borderRadius: "3px",
+                  whiteSpace: "nowrap",
+                  textAlign: "center",
+                }}>
+                  <div style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: "clamp(14px, 3vw, 18px)",
+                    fontWeight: 700, color: C.cyan,
+                  }}>${amount}</div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        <RevealBlock delay={0.4}>
+        {/* Summary */}
+        <div style={{
+          marginTop: "48px", textAlign: "center",
+          opacity: rippleStep >= 5 ? 1 : 0,
+          transform: rippleStep >= 5 ? "translateY(0)" : "translateY(16px)",
+          transition: "all 0.8s ease",
+        }}>
           <p style={{
-            textAlign: "center", maxWidth: "600px", margin: "48px auto 0",
+            fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
+            fontSize: "clamp(20px, 4vw, 28px)",
+            fontWeight: 700, color: C.white, marginBottom: "8px",
+          }}>
+            One purchase. <span style={{ color: C.cyan }}>Five ripples. $500</span> in local impact.
+          </p>
+          <p style={{
             fontFamily: "'Outfit', sans-serif", fontSize: "18px",
-            color: C.secondary, lineHeight: 1.6,
+            color: C.secondary, maxWidth: "520px", margin: "16px auto 0",
+            lineHeight: 1.6,
           }}>
             Do that once a week and you've redirected <span style={{ color: C.cyan, fontWeight: 700 }}>over $2,300 a year</span> back into your neighborhood.
-            And because local dollars circulate 3–5 times before they leave, that $2,300 generates up to <span style={{ color: C.cyan, fontWeight: 700 }}>$11,500 in local economic activity</span>.
           </p>
-        </RevealBlock>
-
-        <RevealBlock delay={0.55}>
           <p style={{
             textAlign: "center", maxWidth: "600px", margin: "32px auto 0",
             fontFamily: "'Outfit', sans-serif", fontSize: "20px",
@@ -413,7 +480,7 @@ export default function UWSLanding() {
           }}>
             Now multiply that by everyone using this app and the economy starts to work for all of us.
           </p>
-        </RevealBlock>
+        </div>
       </section>
 
       {/* ─── THE COST OF CONVENIENCE ─── */}

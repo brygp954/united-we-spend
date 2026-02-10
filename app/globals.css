@@ -49,3 +49,38 @@ input::placeholder {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
+
+@keyframes ripplePulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.3); }
+  70% { box-shadow: 0 0 0 15px rgba(34, 211, 238, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+}
+
+@keyframes dropIn {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+  75% { transform: translate(-50%, -50%) scale(0.95); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes ringExpand {
+  0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes ringPulseAnim {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.015); }
+}
+
+@keyframes labelPop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  60% { transform: translate(-50%, -50%) scale(1.08); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.3; }
+}
