@@ -873,19 +873,19 @@ export default function UnitedWeSpend() {
           >United We <span style={{ color: C.cyan }}>Spend</span></button>
           <button onClick={() => setShowLocationModal(true)} style={{
             display: "flex", alignItems: "center", gap: "6px",
-            background: "none", border: `1px solid ${C.darkBorder}`,
-            cursor: "pointer", padding: "5px 10px", color: C.darkMuted,
+            background: "none", border: `1px solid ${C.cyan}44`,
+            cursor: "pointer", padding: "5px 10px", color: C.cyan,
           }}>
             <MapPinIcon size={12} />
-            <span style={{ fontFamily: F.body, fontSize: "12px", fontWeight: 500 }}>Twin Cities, MN</span>
-            <span style={{ fontSize: "9px", opacity: 0.5 }}>▼</span>
+            <span style={{ fontFamily: F.body, fontSize: "12px", fontWeight: 700 }}>Twin Cities, MN</span>
+            <span style={{ fontSize: "9px", opacity: 0.7 }}>▼</span>
           </button>
         </div>
       </header>
 
       {/* ─── HERO (DARK GRADIENT) ─── */}
       <div style={{
-        background: C.darkGrad, padding: "56px 24px 48px", textAlign: "center",
+        background: C.dark, padding: "56px 24px 48px", textAlign: "center",
         opacity: heroVisible ? 1 : 0, transform: heroVisible ? "translateY(0)" : "translateY(-10px)",
         transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       }}>
