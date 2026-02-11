@@ -270,7 +270,7 @@ export default function UWSLanding() {
         </RevealBlock>
 
         <RevealBlock delay={0.15}>
-          <div style={{ marginBottom: "24px" }}>
+          <div style={{ marginTop: "32px", marginBottom: "24px" }}>
             <AnimatedNumber target={73} suffix="¢" />
           </div>
         </RevealBlock>
