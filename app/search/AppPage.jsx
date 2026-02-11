@@ -1029,7 +1029,7 @@ function SpendingThisWeek({ onRequestBusiness }) {
           color: C.lightText, lineHeight: 1.5, marginBottom: "12px",
         }}>
           ${stats.totalDollars.toLocaleString()} redirected since launch.{" "}
-          <span style={{ color: C.teal }}>Next goal: $200K.</span>
+          <span style={{ color: C.teal }}>Next goal: $500K.</span>
         </div>
         <div style={{
           height: "5px", background: C.slate200,
@@ -1037,7 +1037,7 @@ function SpendingThisWeek({ onRequestBusiness }) {
         }}>
           <div style={{
             height: "100%", borderRadius: "3px",
-            width: `${Math.min(100, (stats.totalDollars / 200000) * 100)}%`,
+            width: `${Math.min(100, (stats.totalDollars / 500000) * 100)}%`,
             background: `linear-gradient(90deg, ${C.teal}, ${C.cyan})`,
             animation: "barGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) both",
           }} />
@@ -1273,8 +1273,8 @@ export default function UnitedWeSpend() {
   const handleKeyDown = (e) => { if (e.key === "Enter") handleSearch(); };
 
   const quickSearches = [
-    ["Coffee", "Groceries", "Hardware", "Banking"],
-    ["Pharmacy", "Wellness", "Fitness", "CBD/Cannabis"],
+    ["Coffee", "Groceries", "Hardware", "CBD/Cannabis"],
+    ["Pharmacy", "Fitness", "Banking"],
   ];
 
   const handleQuickSearch = (term) => {

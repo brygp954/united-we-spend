@@ -143,7 +143,7 @@ export default function UWSLanding() {
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(8,11,17,0.8)", backdropFilter: "blur(20px)",
-        borderBottom: `1px solid ${C.border}`,
+        borderBottom: `2px solid ${C.cyan}`,
       }}>
         <div style={{
           maxWidth: "1200px", margin: "0 auto", padding: "16px 32px",
