@@ -159,10 +159,10 @@ function getCommunityStats() {
   const week = getCurrentWeekNumber();
   const seed = (week * 137 + 42) % 1000;
   return {
-    peopleThisWeek: 127 + (seed % 80),
-    dollarsThisWeek: 8400 + (seed % 6000),
-    totalPeople: 1847 + seed,
-    totalDollars: 142600 + (seed * 73),
+    peopleThisWeek: 1027 + (seed % 80),
+    dollarsThisWeek: 26000 + (seed % 3000),
+    totalPeople: 4847 + seed,
+    totalDollars: 342600 + (seed * 73),
     businesses: 24 + (seed % 8),
   };
 }
@@ -967,7 +967,7 @@ function SpendingThisWeek({ onRequestBusiness }) {
           fontFamily: F.display, fontSize: "22px", fontWeight: 700,
           color: C.lightText, margin: "0 0 14px 0",
           letterSpacing: "-0.01em",
-        }}>We see you, Twin Cities.</h3>
+        }}>We see you, Twin Cities. You're having a week! 🔥</h3>
 
         <div style={{
           display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
