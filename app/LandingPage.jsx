@@ -74,55 +74,6 @@ function AnimatedNumber({ target, prefix = "", suffix = "", color = C.cyan }) {
   );
 }
 
-// ─── FAQ ────────────────────────────────────────────────────
-function FAQ() {
-  const [openIndex, setOpenIndex] = useState(null);
-  const faqs = [
-    { q: "How does this work?", a: "Search for what you need. See local and union options ranked by how much your dollar does for your community. Tap \"I'm Shopping Here\" to commit and share." },
-    { q: "Does this actually make a difference?", a: "When you spend $100 at a local business, roughly $73 stays in your community. Spend that same $100 at a national retail chain, and only $27 stays. Do that once a week, and you've redirected over $2,300 a year back into your neighborhood. Now multiply that by everyone using this app." },
-    { q: "Is this political?", a: "No. It's economics. This isn't about who you vote for, it's about where your money goes. And you get to decide that right here and right now." },
-    { q: "What's the catch?", a: "No catch. 73 cents of every dollar leaves your community. That's a problem worth solving. We can't change that but you can." },
-  ];
-
-  return (
-    <div style={{ maxWidth: "640px", margin: "0 auto" }}>
-      {faqs.map((item, i) => (
-        <RevealBlock key={i} delay={i * 0.08}>
-          <div style={{ borderBottom: `1px solid ${C.border}` }}>
-            <button onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              style={{
-                width: "100%", padding: "22px 0", background: "none", border: "none",
-                cursor: "pointer", display: "flex", justifyContent: "space-between",
-                alignItems: "center", textAlign: "left", gap: "16px",
-              }}>
-              <span style={{
-                fontFamily: "'Outfit', sans-serif", fontSize: "17px",
-                fontWeight: 600, color: C.white,
-              }}>{item.q}</span>
-              <span style={{
-                fontFamily: "'Outfit', sans-serif", fontSize: "24px",
-                fontWeight: 300, color: C.cyan, flexShrink: 0,
-                transform: openIndex === i ? "rotate(45deg)" : "rotate(0deg)",
-                transition: "transform 0.25s ease",
-              }}>+</span>
-            </button>
-            <div style={{
-              maxHeight: openIndex === i ? "300px" : "0",
-              overflow: "hidden",
-              transition: "max-height 0.4s ease",
-            }}>
-              <p style={{
-                fontFamily: "'Outfit', sans-serif", fontSize: "15px",
-                color: C.secondary, lineHeight: 1.7, padding: "0 0 22px 0", margin: 0,
-              }}>{item.a}</p>
-            </div>
-          </div>
-        </RevealBlock>
-      ))}
-    </div>
-  );
-}
-
 // ─── MAIN LANDING PAGE ──────────────────────────────────────
 export default function UWSLanding() {
   const [heroReady, setHeroReady] = useState(false);
@@ -157,6 +108,36 @@ export default function UWSLanding() {
 
   return (
     <div style={{ background: C.bg, color: C.white, minHeight: "100vh", overflowX: "hidden" }}>
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 1; }
+        }
+        @keyframes glowPulse {
+          0%, 100% { opacity: 0.6; }
+          50% { opacity: 1; }
+        }
+        @keyframes ringExpand {
+          0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+          100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        @keyframes ringPulseAnim {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); }
+          50% { transform: translate(-50%, -50%) scale(1.03); }
+        }
+        @keyframes dropIn {
+          0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+          100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        @keyframes ripplePulse {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); }
+          50% { transform: translate(-50%, -50%) scale(1.08); }
+        }
+        @keyframes labelPop {
+          0% { transform: translateX(-50%) scale(0.5); opacity: 0; }
+          100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+      `}</style>
 
       {/* ─── NAV ─── */}
       <nav style={{
@@ -276,10 +257,16 @@ export default function UWSLanding() {
         <RevealBlock>
           <div style={{
             fontFamily: "'Outfit', sans-serif", fontSize: "13px",
-            fontWeight: 600, color: C.white,
+            fontWeight: 600, color: C.cyan,
             textTransform: "uppercase", letterSpacing: "0.2em",
             marginBottom: "24px",
-          }}>Every time you shop at a chain</div>
+          }}>The Problem</div>
+          <h2 style={{
+            fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
+            fontSize: "clamp(32px, 7vw, 48px)",
+            fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em",
+            color: C.white, margin: "0",
+          }}>Every time you shop at a chain...</h2>
         </RevealBlock>
 
         <RevealBlock delay={0.15}>
@@ -300,42 +287,6 @@ export default function UWSLanding() {
         </RevealBlock>
       </section>
 
-      {/* ─── THE FLIP ─── */}
-      <section style={{
-        padding: "120px 32px", textAlign: "center",
-        borderTop: `1px solid ${C.border}`,
-      }}>
-        <RevealBlock>
-          <div style={{
-            fontFamily: "'Outfit', sans-serif", fontSize: "13px",
-            fontWeight: 600, color: C.white,
-            textTransform: "uppercase", letterSpacing: "0.2em",
-            marginBottom: "24px",
-          }}>But when you spend local</div>
-        </RevealBlock>
-
-        <RevealBlock delay={0.15}>
-          <div style={{
-            fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-            fontSize: "clamp(64px, 14vw, 96px)",
-            fontWeight: 700, color: C.cyan,
-            lineHeight: 1, letterSpacing: "-0.04em",
-            marginBottom: "24px",
-          }}>3–5x</div>
-        </RevealBlock>
-
-        <RevealBlock delay={0.3}>
-          <p style={{
-            fontFamily: "'Outfit', sans-serif",
-            fontSize: "clamp(22px, 3.5vw, 28px)",
-            color: C.secondary, lineHeight: 1.5,
-            maxWidth: "600px", margin: "0 auto",
-          }}>
-            That same dollar <span style={{ color: C.white, fontWeight: 600 }}>circulates 3–5x through your neighborhood</span> before it leaves. More jobs. More tax base. Better city.
-          </p>
-        </RevealBlock>
-      </section>
-
       {/* ─── THE MATH ─── */}
       <section ref={rippleRef} style={{ padding: "120px 32px", background: C.bgAlt, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
         <RevealBlock>
@@ -344,14 +295,14 @@ export default function UWSLanding() {
               fontFamily: "'Outfit', sans-serif", fontSize: "13px",
               fontWeight: 600, color: C.cyan,
               textTransform: "uppercase", letterSpacing: "0.2em",
-              marginBottom: "16px",
-            }}>The math is simple</div>
+              marginBottom: "24px",
+            }}>The Solution</div>
             <h2 style={{
               fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
               fontSize: "clamp(40px, 8vw, 56px)",
               fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em",
               maxWidth: "700px", margin: "0 auto",
-            }}>Spend $100 locally.<br /><span style={{ color: C.cyan }}>Watch it multiply.</span></h2>
+            }}>Spend $100 locally:<br /><span style={{ color: C.cyan }}>it circulates.</span></h2>
           </div>
         </RevealBlock>
 
@@ -384,8 +335,8 @@ export default function UWSLanding() {
             const sizes = [22, 38, 55, 72, 90];
             const size = sizes[i];
             const active = rippleStep >= i + 1;
-            const opacity = 1 - i * 0.12;
-            const borderWidth = Math.max(1.5, 3 - i * 0.4);
+            const opacity = 1 - i * 0.2;
+            const borderWidth = Math.max(1, 2.5 - i * 0.4);
 
             return active ? (
               <div key={i} style={{
@@ -406,6 +357,7 @@ export default function UWSLanding() {
               width: "22%", height: "22%", borderRadius: "50%",
               background: `radial-gradient(circle, ${C.teal}66 0%, ${C.teal}22 100%)`,
               display: "flex", alignItems: "center", justifyContent: "center",
+              transform: "translate(-50%, -50%)",
               animation: "dropIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, ripplePulse 2.5s ease-in-out 0.7s infinite",
             }}>
               <div style={{
@@ -428,16 +380,14 @@ export default function UWSLanding() {
               <div key={`label-${i}`} style={{
                 position: "absolute",
                 top: `${topPercent}%`, left: "50%",
+                transform: "translateX(-50%)",
                 animation: "labelPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards",
                 animationDelay: "0.2s",
                 opacity: 0,
                 zIndex: 10,
               }}>
                 <div style={{
-                  background: C.bgAlt,
                   padding: "5px 14px",
-                  border: `1.5px solid ${C.teal}66`,
-                  borderRadius: "3px",
                   whiteSpace: "nowrap",
                   textAlign: "center",
                 }}>
@@ -474,51 +424,6 @@ export default function UWSLanding() {
             Now multiply that by everyone using this app and the economy starts to work for all of us.
           </p>
         </div>
-      </section>
-
-      {/* ─── THE COST OF CONVENIENCE ─── */}
-      <section style={{
-        padding: "120px 32px",
-        borderTop: `1px solid ${C.border}`,
-      }}>
-        <RevealBlock>
-          <div style={{ textAlign: "center", marginBottom: "64px" }}>
-            <div style={{
-              fontFamily: "'Outfit', sans-serif", fontSize: "13px",
-              fontWeight: 600, color: C.cyan,
-              textTransform: "uppercase", letterSpacing: "0.2em",
-              marginBottom: "16px",
-            }}>The cost of convenience</div>
-            <h2 style={{
-              fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-              fontSize: "clamp(40px, 8vw, 56px)",
-              fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em",
-              maxWidth: "700px", margin: "0 auto",
-            }}>
-              Convenience isn't free.<br />You just pay for it later.<br /><span style={{ color: C.cyan }}>And you pay extra.</span>
-            </h2>
-          </div>
-        </RevealBlock>
-
-        <RevealBlock delay={0.2}>
-          <p style={{
-            textAlign: "center", maxWidth: "620px", margin: "0 auto",
-            fontFamily: "'Outfit', sans-serif", fontSize: "18px",
-            color: C.secondary, lineHeight: 1.8,
-          }}>
-            Every dollar that flows to a chain instead of a local business is a job that doesn't get created and a tax dollar that doesn't get collected. Your city still needs funding, so it borrows from the state. The state borrows from the feds. Every layer adds bureaucracy, inefficiency, and politicians rewarding the corporations that funded their campaigns. By the time that money makes it back to your street, most of it is gone.
-          </p>
-        </RevealBlock>
-
-        <RevealBlock delay={0.4}>
-          <p style={{
-            textAlign: "center", maxWidth: "620px", margin: "48px auto 0",
-            fontFamily: "'Outfit', sans-serif", fontSize: "18px",
-            color: C.white, lineHeight: 1.7, fontWeight: 600,
-          }}>
-            The system made the extractive option the easy option. We're here to make the local option just as easy.
-          </p>
-        </RevealBlock>
       </section>
 
       {/* ─── HOW IT WORKS ─── */}
@@ -570,26 +475,6 @@ export default function UWSLanding() {
         </div>
       </section>
 
-      {/* ─── FAQ ─── */}
-      <section style={{ padding: "120px 32px" }}>
-        <RevealBlock>
-          <div style={{ textAlign: "center", marginBottom: "64px" }}>
-            <div style={{
-              fontFamily: "'Outfit', sans-serif", fontSize: "13px",
-              fontWeight: 600, color: C.cyan,
-              textTransform: "uppercase", letterSpacing: "0.2em",
-              marginBottom: "16px",
-            }}>FAQ</div>
-            <h2 style={{
-              fontFamily: "'Plus Jakarta Sans', 'Outfit', sans-serif",
-              fontSize: "clamp(40px, 8vw, 48px)",
-              fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em",
-            }}>Questions you might have.</h2>
-          </div>
-        </RevealBlock>
-        <FAQ />
-      </section>
-
       {/* ─── CTA ─── */}
       <section id="cta" style={{
         padding: "120px 32px",
@@ -634,7 +519,7 @@ export default function UWSLanding() {
             color: C.secondary, maxWidth: "480px", margin: "0 auto 40px",
             lineHeight: 1.6,
           }}>
-            Search local and union businesses in St. Paul and Minneapolis. Free. No account needed.
+            Find local and union businesses in Minneapolis and St. Paul. Free. No account needed.
           </p>
 
           <a href="/search" style={{
